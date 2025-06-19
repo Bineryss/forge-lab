@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using Core.Item;
 using Core.SaveSystem.Inventory;
 using UnityEngine;
 
@@ -35,21 +37,28 @@ namespace Core.SaveSystem
             return data;
         }
 
+
+        [SerializeField] private List<ItemInstanceData> resources;
+        [SerializeField] private List<ItemInstanceData> ships;
+        [SerializeField] private SInventorySaveDataContainer loaded;
+        [SerializeField] private SInventorySaveDataContainer converted;
         void Awake()
         {
             // testing only
-            ISaveData testData = new InventorySaveDataContainer(
-                new SInventorySaveDataContainer
-                {
-                    Resources = new() { "Carbonate", "Voidrium" },
-                    Ships = new() { "alpha-1" }
-                });
+            Dictionary<ItemInstanceData, int> resources = this.resources.ToDictionary(el => el, el => 10);
+            this.ships[0].data = new ShipInstanceData(new List<Effect> { Effect.BUFF, Effect.NEUTRAL }, "weapon-0"); ;
+            this.ships[1].data = new ShipInstanceData(new List<Effect> { Effect.NEUTRAL }, "weapon-12"); ;
+
+            Dictionary<ItemInstanceData, int> ships = this.ships.ToDictionary(el => el, el => 1);
+            SInventorySaveDataContainer container = InventorySaveMapper.Map(resources, ships);
+            converted = container;
+            ISaveData testData = new InventorySaveDataContainer(container);
             SaveData(testData);
 
             saveData.Clear();
             LoadData();
-            SInventorySaveDataContainer loadedInvetory = GetSaveData(DataType.INVETORY) is SInventorySaveDataContainer i ? i : default;
-            Debug.Log($"loaded resources: {loadedInvetory.Resources[0]}, loaded ships {loadedInvetory.Ships[0]}");
+            loaded = GetSaveData(DataType.INVETORY) is SInventorySaveDataContainer i ? i : default;
+            Debug.Log($"loaded resources: {loaded.Resources[0]}, loaded ships {loaded.Ships[0]}");
         }
     }
 }

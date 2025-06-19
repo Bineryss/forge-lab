@@ -18,7 +18,7 @@ namespace Core.SaveSystem.Inventory
     [Serializable]
     public struct SInventorySaveDataContainer: ISaveDataContainer
     {
-        public List<string> Resources;
-        public List<string> Ships;
+        public List<ItemResourceDataContainer> Resources;
+        public List<ItemShipDataContainer> Ships;
     }
 }
