@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Epic
   m_EditorClassIdentifier: 
   Background: {fileID: 0}
-  Score: 0
+  Score: 50
   DropChance: 0

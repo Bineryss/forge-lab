@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb201ccece4eefa428ab903e0c7baa92, type: 3}
-  m_Name: Carbonate-7
+  m_Script: {fileID: 11500000, guid: 5853234eeaade6845893d3df3149ca02, type: 3}
+  m_Name: Lichtbogen
   m_EditorClassIdentifier: 
-  id: 6b4a0c74-b12e-4dd7-94aa-d158c1fe59f0
-  itemName: 
+  id: f5cb8b79-08df-4ac7-b3a8-f7406fcaa377
+  itemName: Lichtbogen
   description: 
   icon: {fileID: 0}
-  rarity: {fileID: 0}
+  rarity: {fileID: 11400000, guid: 42cafe03e51a11641923a0199c5cab87, type: 2}
   effects: 
-  Characteristic: 0
+  speed: 0
+  ability: stromschlag

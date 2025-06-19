@@ -9,14 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5853234eeaade6845893d3df3149ca02, type: 3}
-  m_Name: Lichtbogen
+  m_Script: {fileID: 11500000, guid: eb201ccece4eefa428ab903e0c7baa92, type: 3}
+  m_Name: Carbonate-7
   m_EditorClassIdentifier: 
-  id: f5cb8b79-08df-4ac7-b3a8-f7406fcaa377
-  itemName: 
+  id: 6b4a0c74-b12e-4dd7-94aa-d158c1fe59f0
+  itemName: Carbonate-7
   description: 
   icon: {fileID: 0}
-  rarity: {fileID: 0}
+  rarity: {fileID: 11400000, guid: 13abf2f1e875c164a98689a42faf3019, type: 2}
   effects: 
-  speed: 0
-  ability: 
+  Characteristic: 0

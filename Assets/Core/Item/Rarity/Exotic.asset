@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Exotic
   m_EditorClassIdentifier: 
   Background: {fileID: 0}
-  Score: 0
+  Score: 100
   DropChance: 0

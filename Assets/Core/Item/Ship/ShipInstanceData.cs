@@ -16,10 +16,11 @@ namespace Core.Item
         {
             this.effects = effects;
         }
-        public ShipInstanceData(List<Effect> effects, string equipedWeaponId)
+        public ShipInstanceData(List<Effect> effects, string equipedWeaponId, string id)
         {
             this.effects = effects;
             this.equipedWeaponId = equipedWeaponId;
+            this.id = id;
         }
     }
 }

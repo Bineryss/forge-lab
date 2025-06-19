@@ -41,17 +41,16 @@ namespace Core.SaveSystem
         [SerializeField] private List<ItemInstanceData> resources;
         [SerializeField] private List<ItemInstanceData> ships;
         [SerializeField] private SInventorySaveDataContainer loaded;
-        [SerializeField] private SInventorySaveDataContainer converted;
+        [SerializeField] private ItemInstanceData converted;
         void Awake()
         {
             // testing only
             Dictionary<ItemInstanceData, int> resources = this.resources.ToDictionary(el => el, el => 10);
-            this.ships[0].data = new ShipInstanceData(new List<Effect> { Effect.BUFF, Effect.NEUTRAL }, "weapon-0"); ;
-            this.ships[1].data = new ShipInstanceData(new List<Effect> { Effect.NEUTRAL }, "weapon-12"); ;
+            this.ships[0].data = new ShipInstanceData(new List<Effect> { Effect.BUFF, Effect.NEUTRAL }, "weapon-0", "1234-5678"); ;
+            this.ships[1].data = new ShipInstanceData(new List<Effect> { Effect.NEUTRAL }, "weapon-12", "6734-2342"); ;
 
             Dictionary<ItemInstanceData, int> ships = this.ships.ToDictionary(el => el, el => 1);
             SInventorySaveDataContainer container = InventorySaveMapper.Map(resources, ships);
-            converted = container;
             ISaveData testData = new InventorySaveDataContainer(container);
             SaveData(testData);
 
@@ -59,6 +58,15 @@ namespace Core.SaveSystem
             LoadData();
             loaded = GetSaveData(DataType.INVETORY) is SInventorySaveDataContainer i ? i : default;
             Debug.Log($"loaded resources: {loaded.Resources[0]}, loaded ships {loaded.Ships[0]}");
+
+            ItemShipDataContainer first = loaded.Ships[0];
+            converted = new ItemInstanceData();
+            converted.data = null;
+            ItemRegistry.BuildIndex();
+            converted.Item = ItemRegistry.Get(first.StaticId);
+            ShipInstanceData instance = new ShipInstanceData(first.Effects, first.selectedWeaponId, first.Id);
+            converted.data = instance;
+            Debug.Log($"🚀 converted item instance data {converted.Id}-{converted.data.Effects}-{converted.data.Id}-{(converted.data as ShipInstanceData).EquipedWeaponId}");
         }
     }
 }
