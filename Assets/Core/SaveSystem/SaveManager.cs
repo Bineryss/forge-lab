@@ -103,13 +103,17 @@ namespace Core.SaveSystem
             InventorySaveSystem.Instance.Save(inventoryData);
 
 
-            //loading test
+            // loading setup, will be done centralized and somewhere else
             ItemRegistry.BuildIndex();
             saveData.Clear();
             Load();
-            loaded = GetSaveData(DataType.INVENTORY) is InventoryDataContainer i ? i : default;
-            Debug.Log($"loaded resources: {loaded.Resources[0]}, loaded ships {loaded.Ships[0]}");
+            //
 
+            var inventory = InventorySaveSystem.Instance.Load();
+
+            Debug.Log($"💻 Inventory data: {string.Join(", ", inventory.Select(kvp => $"{kvp.Key}: {kvp.Value}"))}");
+
+            loaded = GetSaveData(DataType.INVENTORY) is InventoryDataContainer i ? i : default;
             ItemShipDataContainer first = loaded.Ships[0];
             converted = new ItemInstanceData
             {
