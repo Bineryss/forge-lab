@@ -6,17 +6,17 @@ namespace Core.SaveSystem.Inventory
     public class InventorySaveDataContainer : ISaveData
     {
         public ISaveDataContainer Data => data;
-        public DataType Type => DataType.INVETORY;
+        public DataType Type => DataType.INVENTORY;
 
-        private SInventorySaveDataContainer data;
-        public InventorySaveDataContainer(SInventorySaveDataContainer data)
+        private readonly InventoryDataContainer data;
+        public InventorySaveDataContainer(InventoryDataContainer data)
         {
             this.data = data;
         }
     }
 
     [Serializable]
-    public struct SInventorySaveDataContainer: ISaveDataContainer
+    public class InventoryDataContainer : ISaveDataContainer
     {
         public List<ItemResourceDataContainer> Resources;
         public List<ItemShipDataContainer> Ships;

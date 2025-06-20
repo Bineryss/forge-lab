@@ -1,27 +1,32 @@
 using System;
 using System.Collections.Generic;
 using Core.SaveSystem.Inventory;
+using UnityEngine;
+
 
 namespace Core.SaveSystem
 {
-    public class SaveDataMapper
+    public class SaveDataMapper : IMapper<SaveFileContainer, Dictionary<DataType, ISaveDataContainer>>
     {
-        public static SaveFileContainer Convert(Dictionary<DataType, ISaveDataContainer> saveData)
-        {
+        public static SaveDataMapper Instance => instance ??= new SaveDataMapper();
+        private static SaveDataMapper instance;
 
-            saveData.TryGetValue(DataType.INVETORY, out ISaveDataContainer invetory);
+
+        public SaveFileContainer Map(Dictionary<DataType, ISaveDataContainer> saveData)
+        {
+            saveData.TryGetValue(DataType.INVENTORY, out ISaveDataContainer inventory);
 
             return new SaveFileContainer
             {
-                Inventory = invetory is SInventorySaveDataContainer container ? container : default,
+                Inventory = inventory as InventoryDataContainer,
             };
         }
 
-        public static Dictionary<DataType, ISaveDataContainer> Convert(SaveFileContainer data)
+        public Dictionary<DataType, ISaveDataContainer> Map(SaveFileContainer data)
         {
             return new Dictionary<DataType, ISaveDataContainer>
             {
-                {DataType.INVETORY, data.Inventory }
+                {DataType.INVENTORY, data.Inventory }
             };
         }
     }
@@ -29,6 +34,6 @@ namespace Core.SaveSystem
     [Serializable]
     public struct SaveFileContainer
     {
-        public SInventorySaveDataContainer Inventory;
+        public InventoryDataContainer Inventory;
     }
 }

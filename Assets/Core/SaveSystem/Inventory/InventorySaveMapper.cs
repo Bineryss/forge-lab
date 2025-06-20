@@ -4,27 +4,51 @@ using Core.Item;
 
 namespace Core.SaveSystem.Inventory
 {
-    public class InventorySaveMapper
+    public class InventorySaveMapper : IMapper<InventoryDataContainer, Dictionary<ItemInstanceData, int>>
     {
-        public static SInventorySaveDataContainer Map(Dictionary<ItemInstanceData, int> resources, Dictionary<ItemInstanceData, int> ships)
+
+        public static InventorySaveMapper Instance => instance ??= new InventorySaveMapper();
+        private static InventorySaveMapper instance;
+
+        public InventoryDataContainer Map(Dictionary<ItemInstanceData, int> data)
         {
-            return new SInventorySaveDataContainer
+            return new InventoryDataContainer()
             {
-                Resources = resources.Select(el => new ItemResourceDataContainer()
+                Resources = data
+                .Where(el => el.Key.Item.Type == ItemType.RESOURCE)
+                .Select(el => new ItemResourceDataContainer()
                 {
                     Id = el.Key.Id,
                     StaticId = el.Key.StaticId,
                     Quantity = el.Value
                 }).ToList(),
-                Ships = ships.Select(el => new ItemShipDataContainer()
+                Ships = data
+                .Where(el => el.Key.Item.Type == ItemType.SHIP)
+                .Select(el => new ItemShipDataContainer()
                 {
                     Id = el.Key.Id,
                     StaticId = el.Key.StaticId,
                     Quantity = el.Value,
                     Effects = el.Key.data.Effects,
                     selectedWeaponId = el.Key.data is ShipInstanceData instance ? instance.EquipedWeaponId : ""
-                }).ToList()
+                }).ToList(),
+                // Weapons = data
+                // .Where(el => el.Key.Item.Type == ItemType.WEAPON)
+                // .Select(el => new ItemShipDataContainer() //todo add correct type
+                // {
+                //     Id = el.Key.Id,
+                //     StaticId = el.Key.StaticId,
+                //     Quantity = el.Value,
+                //     Effects = el.Key.data.Effects,
+                //     selectedWeaponId = el.Key.data is ShipInstanceData instance ? instance.EquipedWeaponId : "" //add correcet mapping
+                // }).ToList()
             };
+        }
+
+        public Dictionary<ItemInstanceData, int> Map(InventoryDataContainer data)
+        {
+            // mapping logic
+            return new();
         }
     }
 }

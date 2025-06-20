@@ -12,23 +12,27 @@ namespace Core.SaveSystem
         [SerializeField] private string fileName;
         [SerializeField] private Dictionary<DataType, ISaveDataContainer> saveData = new();
 
-        public void SaveData(ISaveData data)
+        public static SaveManager Instance { get; private set; }
+
+        private readonly IMapper<SaveFileContainer, Dictionary<DataType, ISaveDataContainer>> saveDataMapper = SaveDataMapper.Instance;
+
+        public void Save(ISaveData data)
         {
             saveData[data.Type] = data.Data;
 
-            string saveDataJson = JsonUtility.ToJson(SaveDataMapper.Convert(saveData));
-            Debug.Log($"saveDataJson: {saveDataJson}");
+            string saveDataJson = JsonUtility.ToJson(saveDataMapper.Map(saveData));
+            Debug.Log($"📃 saveDataJson: {saveDataJson}");
             File.WriteAllText(Path.Combine(Application.persistentDataPath, fileName), saveDataJson);
         }
 
-        public void LoadData()
+        public void Load()
         {
             string path = Path.Combine(Application.persistentDataPath, fileName);
             if (!File.Exists(path)) return;
 
             string jsonData = File.ReadAllText(path);
             SaveFileContainer saveData = JsonUtility.FromJson<SaveFileContainer>(jsonData);
-            this.saveData = SaveDataMapper.Convert(saveData);
+            this.saveData = saveDataMapper.Map(saveData);
         }
 
         public ISaveDataContainer GetSaveData(DataType type)
@@ -37,26 +41,42 @@ namespace Core.SaveSystem
             return data;
         }
 
-
-        [SerializeField] private List<ItemInstanceData> resources;
-        [SerializeField] private List<ItemInstanceData> ships;
-        [SerializeField] private SInventorySaveDataContainer loaded;
-        [SerializeField] private ItemInstanceData converted;
         void Awake()
         {
-            // testing only
+            if (Instance != null && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
+            Instance = this;
+            Load();
+            invetorySaveSystemTesting();
+            // testing();
+        }
+
+
+
+        // testing
+        [SerializeField] private List<ItemInstanceData> resources;
+        [SerializeField] private List<ItemInstanceData> ships;
+        [SerializeField] private InventoryDataContainer loaded;
+        [SerializeField] private ItemInstanceData converted;
+        private void testing()
+        {
             Dictionary<ItemInstanceData, int> resources = this.resources.ToDictionary(el => el, el => 10);
             this.ships[0].data = new ShipInstanceData(new List<Effect> { Effect.BUFF, Effect.NEUTRAL }, "weapon-0", "1234-5678"); ;
             this.ships[1].data = new ShipInstanceData(new List<Effect> { Effect.NEUTRAL }, "weapon-12", "6734-2342"); ;
 
             Dictionary<ItemInstanceData, int> ships = this.ships.ToDictionary(el => el, el => 1);
-            SInventorySaveDataContainer container = InventorySaveMapper.Map(resources, ships);
+            Dictionary<ItemInstanceData, int> invetoryData = resources.Concat(ships).ToDictionary(pair => pair.Key, pair => pair.Value);
+            InventoryDataContainer container = InventorySaveMapper.Instance.Map(invetoryData);
             ISaveData testData = new InventorySaveDataContainer(container);
-            SaveData(testData);
+            Save(testData);
 
             saveData.Clear();
-            LoadData();
-            loaded = GetSaveData(DataType.INVETORY) is SInventorySaveDataContainer i ? i : default;
+            Load();
+            loaded = GetSaveData(DataType.INVENTORY) is InventoryDataContainer i ? i : default;
             Debug.Log($"loaded resources: {loaded.Resources[0]}, loaded ships {loaded.Ships[0]}");
 
             ItemShipDataContainer first = loaded.Ships[0];
@@ -67,6 +87,37 @@ namespace Core.SaveSystem
             ShipInstanceData instance = new ShipInstanceData(first.Effects, first.selectedWeaponId, first.Id);
             converted.data = instance;
             Debug.Log($"🚀 converted item instance data {converted.Id}-{converted.data.Effects}-{converted.data.Id}-{(converted.data as ShipInstanceData).EquipedWeaponId}");
+        }
+
+        //InvetorySaveMapper testing
+        private void invetorySaveSystemTesting()
+        {
+            Dictionary<ItemInstanceData, int> resources = this.resources.ToDictionary(el => el, el => 69);
+            this.ships[0].data = new ShipInstanceData(new List<Effect> { Effect.BUFF, Effect.NEUTRAL }, "weapon-0", "1234-5678"); ;
+            this.ships[1].data = new ShipInstanceData(new List<Effect> { Effect.NEUTRAL }, "weapon-12", "6734-2342"); ;
+
+            Dictionary<ItemInstanceData, int> ships = this.ships.ToDictionary(el => el, el => 1);
+            Dictionary<ItemInstanceData, int> inventoryData = resources.Concat(ships).ToDictionary(pair => pair.Key, pair => pair.Value);
+
+
+            InventorySaveSystem.Instance.Save(inventoryData);
+
+
+            //loading test
+            ItemRegistry.BuildIndex();
+            saveData.Clear();
+            Load();
+            loaded = GetSaveData(DataType.INVENTORY) is InventoryDataContainer i ? i : default;
+            Debug.Log($"loaded resources: {loaded.Resources[0]}, loaded ships {loaded.Ships[0]}");
+
+            ItemShipDataContainer first = loaded.Ships[0];
+            converted = new ItemInstanceData
+            {
+                data = new ShipInstanceData(first.Effects, first.selectedWeaponId, first.Id),
+                Item = ItemRegistry.Get(first.StaticId),
+            };
+            Debug.Log($"🚀 converted item instance data {converted.Id}-{converted.data.Effects}-{converted.data.Id}-{(converted.data as ShipInstanceData).EquipedWeaponId}");
+
         }
     }
 }

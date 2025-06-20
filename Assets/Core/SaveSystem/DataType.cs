@@ -3,7 +3,7 @@ namespace Core.SaveSystem
 {
     public enum DataType
     {
-        INVETORY,
+        INVENTORY,
         PROGRESS, // tbd
         UPGRADES // tbd
     }
