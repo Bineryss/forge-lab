@@ -5,19 +5,29 @@ using UnityEngine;
 namespace Core.Item
 {
 
-    public static class ItemRegistry
+    public class ItemRegistry
     {
-        static Dictionary<string, Item> map;
+        public static ItemRegistry Instance => instance ??= new ItemRegistry();
+        private static ItemRegistry instance;
 
-        public static void BuildIndex()
+
+
+        private Dictionary<string, Item> map;
+
+        public void BuildIndex()
         {
             Item[] loaded = Resources.LoadAll<Item>("");
-            Debug.Log($"🚚 loaded {loaded.Length}");
+            Debug.Log($"🚚 building index:\n {string.Join("\n ", loaded.Select(el => $"{el.Id} => {el.Type}, {el.Name}"))}");
             map = loaded.ToDictionary(el => el.Id, el => el);
         }
 
-        public static Item Get(string id)
+        public Item Get(string id)
         {
+            if (map == null)
+            {
+                BuildIndex();
+            }
+
             if (map.TryGetValue(id, out Item item))
             {
                 Debug.Log($"🔎 Accesing item with id {id}, name {item.Name}");

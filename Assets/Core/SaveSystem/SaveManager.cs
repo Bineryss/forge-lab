@@ -52,7 +52,6 @@ namespace Core.SaveSystem
             Instance = this;
             Load();
             invetorySaveSystemTesting();
-            // testing();
         }
 
 
@@ -62,32 +61,6 @@ namespace Core.SaveSystem
         [SerializeField] private List<ItemInstanceData> ships;
         [SerializeField] private InventoryDataContainer loaded;
         [SerializeField] private ItemInstanceData converted;
-        private void testing()
-        {
-            Dictionary<ItemInstanceData, int> resources = this.resources.ToDictionary(el => el, el => 10);
-            this.ships[0].data = new ShipInstanceData(new List<Effect> { Effect.BUFF, Effect.NEUTRAL }, "weapon-0", "1234-5678"); ;
-            this.ships[1].data = new ShipInstanceData(new List<Effect> { Effect.NEUTRAL }, "weapon-12", "6734-2342"); ;
-
-            Dictionary<ItemInstanceData, int> ships = this.ships.ToDictionary(el => el, el => 1);
-            Dictionary<ItemInstanceData, int> invetoryData = resources.Concat(ships).ToDictionary(pair => pair.Key, pair => pair.Value);
-            InventoryDataContainer container = InventorySaveMapper.Instance.Map(invetoryData);
-            ISaveData testData = new InventorySaveDataContainer(container);
-            Save(testData);
-
-            saveData.Clear();
-            Load();
-            loaded = GetSaveData(DataType.INVENTORY) is InventoryDataContainer i ? i : default;
-            Debug.Log($"loaded resources: {loaded.Resources[0]}, loaded ships {loaded.Ships[0]}");
-
-            ItemShipDataContainer first = loaded.Ships[0];
-            converted = new ItemInstanceData();
-            converted.data = null;
-            ItemRegistry.BuildIndex();
-            converted.Item = ItemRegistry.Get(first.StaticId);
-            ShipInstanceData instance = new ShipInstanceData(first.Effects, first.selectedWeaponId, first.Id);
-            converted.data = instance;
-            Debug.Log($"🚀 converted item instance data {converted.Id}-{converted.data.Effects}-{converted.data.Id}-{(converted.data as ShipInstanceData).EquipedWeaponId}");
-        }
 
         //InvetorySaveMapper testing
         private void invetorySaveSystemTesting()
@@ -104,7 +77,6 @@ namespace Core.SaveSystem
 
 
             // loading setup, will be done centralized and somewhere else
-            ItemRegistry.BuildIndex();
             saveData.Clear();
             Load();
             //
@@ -118,7 +90,7 @@ namespace Core.SaveSystem
             converted = new ItemInstanceData
             {
                 data = new ShipInstanceData(first.Effects, first.selectedWeaponId, first.Id),
-                Item = ItemRegistry.Get(first.StaticId),
+                Item = ItemRegistry.Instance.Get(first.StaticId),
             };
             Debug.Log($"🚀 converted item instance data {converted.Id}-{converted.data.Effects}-{converted.data.Id}-{(converted.data as ShipInstanceData).EquipedWeaponId}");
 
