@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4cb89766fe9c77429b554c18b5cfaad, type: 3}
   m_Name: Common
   m_EditorClassIdentifier: 
-  Background: {fileID: 0}
+  Background: {fileID: -4739412847751887214, guid: c212cdfbad96bb94680409ad6c019fda, type: 3}
   Score: 0
   DropChance: 0

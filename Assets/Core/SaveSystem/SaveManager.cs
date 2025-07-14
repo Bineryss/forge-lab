@@ -51,7 +51,7 @@ namespace Core.SaveSystem
 
             Instance = this;
             Load();
-            invetorySaveSystemTesting();
+            InvetorySaveSystemTesting();
         }
 
 
@@ -63,7 +63,7 @@ namespace Core.SaveSystem
         [SerializeField] private ItemInstanceData converted;
 
         //InvetorySaveMapper testing
-        private void invetorySaveSystemTesting()
+        private void InvetorySaveSystemTesting()
         {
             Dictionary<ItemInstanceData, int> resources = this.resources.ToDictionary(el => el, el => 69);
             this.ships[0].data = new ShipInstanceData(new List<Effect> { Effect.BUFF, Effect.NEUTRAL }, "weapon-0", "1234-5678"); ;

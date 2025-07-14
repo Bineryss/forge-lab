@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4cb89766fe9c77429b554c18b5cfaad, type: 3}
   m_Name: Exotic
   m_EditorClassIdentifier: 
-  Background: {fileID: 0}
+  Background: {fileID: -2683135687878621783, guid: 36c3aaf76b7db1e4ea1522b4cd538a0e, type: 3}
   Score: 100
   DropChance: 0

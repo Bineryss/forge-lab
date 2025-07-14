@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4cb89766fe9c77429b554c18b5cfaad, type: 3}
   m_Name: Rare
   m_EditorClassIdentifier: 
-  Background: {fileID: 0}
+  Background: {fileID: -5648912583701459738, guid: ebb635a56c79c4f4d8d7bb9551def11b, type: 3}
   Score: 0
   DropChance: 0

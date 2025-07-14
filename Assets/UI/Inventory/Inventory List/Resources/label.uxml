@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Inventory%20List/tag-styles.uss?fileID=7433441132597879392&amp;guid=36e2721813383224dbd58a208b9ce7cb&amp;type=3#tag-styles" />
+    <ui:VisualElement name="tag" data-source-type="UI.Inventory.UILabel, Assembly-CSharp" class="body">
+        <ui:Label text="#label" class="text">
+            <Bindings>
+                <ui:DataBinding property="text" data-source-path="Label" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:Label>
+    </ui:VisualElement>
+</ui:UXML>

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4cb89766fe9c77429b554c18b5cfaad, type: 3}
   m_Name: Epic
   m_EditorClassIdentifier: 
-  Background: {fileID: 0}
+  Background: {fileID: -8326712265333833893, guid: 3b42454dee8378c4894579cdb99f9b91, type: 3}
   Score: 50
   DropChance: 0

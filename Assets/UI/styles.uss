@@ -1,0 +1,91 @@
+.button:hover {
+    transition-duration: 0.2s;
+    scale: 1.05 1.05;
+}
+
+.button {
+    transition-duration: 0.2s;
+}
+
+.button:active {
+    transition-duration: 0.1s;
+    scale: 0.95 0.95;
+}
+
+.button-reset {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.tag-body {
+    margin: 2px;
+    padding: 2px;
+    border-width: 2px;
+    border-left-width: 4px;
+    border-color: rgb(0, 0, 0);
+    flex-grow: initial;
+    flex-shrink: initial;
+    align-self: flex-start;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.tag-text {
+    -unity-font-definition: url("project://database/Assets/UI/Fonts/BignoodletitlingOblique-BxY5.ttf?fileID=12800000&guid=2d7f12ac0f2aabd4993fc45a3ad3a150&type=3#BignoodletitlingOblique-BxY5");
+    padding: 0;
+    margin: 0;
+    color: rgb(255, 255, 255);
+}
+
+.tag-list-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.inventory-item-container {
+    width: 100px;
+    height: 100px;
+    margin: 4px;
+    align-self: center;
+}
+
+.inventory-item-counter {
+    -unity-font-definition: url("project://database/Assets/UI/Fonts/Bignoodletitling-8ojz.ttf?fileID=12800000&guid=49afe45daccf68849b2320d89c04ac13&type=3#Bignoodletitling-8ojz");
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+.inventory-item-counter-container {
+    padding-top: 4px;
+    padding-right: 4px;
+    padding-bottom: 4px;
+    padding-left: 4px;
+    background-color: rgb(30, 30, 30);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border-top-left-radius: 8px;
+}
+
+.inventory-item-icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

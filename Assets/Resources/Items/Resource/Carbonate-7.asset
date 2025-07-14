@@ -15,7 +15,7 @@ MonoBehaviour:
   id: 6b4a0c74-b12e-4dd7-94aa-d158c1fe59f0
   itemName: Carbonate-7
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: 8566983397844139523, guid: 1eb63b0f277e63445921a204b1377362, type: 3}
   rarity: {fileID: 11400000, guid: 13abf2f1e875c164a98689a42faf3019, type: 2}
   effects: 
   Characteristic: 0

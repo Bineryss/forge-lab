@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/styles.uss?fileID=7433441132597879392&amp;guid=1bc86030b6323b049af465e502342619&amp;type=3#styles" />
+    <UI.Inventory.InventoryUIElement name="InventoryUIElement" background="project://database/Assets/Core/Item/Rarity/exotic.png?fileID=-2683135687878621783&amp;guid=36c3aaf76b7db1e4ea1522b4cd538a0e&amp;type=3#exotic_0" icon="project://database/Assets/Resources/Items/Resource/carbonate-7.PNG?fileID=8566983397844139523&amp;guid=1eb63b0f277e63445921a204b1377362&amp;type=3#carbonate-7_0" style="align-self: center;" />
+</ui:UXML>

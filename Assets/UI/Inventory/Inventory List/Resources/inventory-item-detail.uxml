@@ -1,0 +1,21 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Inventory%20List/tag-styles.uss?fileID=7433441132597879392&amp;guid=36e2721813383224dbd58a208b9ce7cb&amp;type=3#tag-styles" />
+    <ui:VisualElement style="flex-grow: 1; background-image: none; border-top-left-radius: 16px; border-top-right-radius: 16px; border-bottom-right-radius: 16px; border-bottom-left-radius: 16px;">
+        <ui:VisualElement style="flex-grow: initial; background-image: url(&quot;project://database/Assets/Core/Item/Rarity/exotic.png?fileID=-2683135687878621783&amp;guid=36c3aaf76b7db1e4ea1522b4cd538a0e&amp;type=3#exotic_0&quot;); flex-direction: row; align-items: center; justify-content: space-between;">
+            <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-image: resource(&apos;Items/Resource/carbonate-7&apos;); max-width: 100px; max-height: 100px; width: 100px; height: 100px; -unity-background-scale-mode: stretch-to-fill;" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; background-color: rgb(49, 49, 49);">
+            <ui:Label text="Title" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Bignoodletitling-8ojz.ttf?fileID=12800000&amp;guid=49afe45daccf68849b2320d89c04ac13&amp;type=3#Bignoodletitling-8ojz&quot;); color: rgb(255, 255, 255); -unity-font-style: bold; font-size: 48px;" />
+            <ui:Label text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet." style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/Roboto-VariableFont_wdth,wght.ttf?fileID=12800000&amp;guid=ffa0037bb472a614686a83cf425e7d8d&amp;type=3#Roboto-VariableFont_wdth,wght&quot;); color: rgb(255, 255, 255); white-space: normal;" />
+            <ui:VisualElement style="flex-grow: 1; flex-direction: row; flex-wrap: wrap;">
+                <TagElement label="cryonis" background-color="#0068FFFF" name="TagElement" />
+                <TagElement label="time-skip" background-color="#FFCC56FF" name="TagElement" />
+                <TagElement label="hidden" background-color="#3B2134FF" name="TagElement" />
+                <TagElement label="sleeper" background-color="#481627FF" name="TagElement" />
+                <TagElement label="strong" background-color="#9F9F9FFF" name="TagElement" />
+                <TagElement label="frozen" background-color="#00E7FFFF" name="TagElement" />
+                <UI.Inventory.TagList />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
